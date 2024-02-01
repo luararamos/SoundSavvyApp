@@ -37,4 +37,10 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    @Preview
+    @Composable
+    fun preview(){
+        MainScreen()
+    }
 }
