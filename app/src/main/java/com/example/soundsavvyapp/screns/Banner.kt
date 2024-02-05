@@ -1,8 +1,5 @@
-@file:Suppress("IMPLICIT_CAST_TO_ANY")
-
 package com.example.soundsavvyapp.screns
 
-import android.graphics.Color
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -64,7 +61,7 @@ fun Banner(modifier: Modifier = Modifier) {
     }
 
     Column(
-        modifier.fillMaxSize(),
+        modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(modifier = modifier.wrapContentSize()) {
@@ -155,8 +152,8 @@ fun PageIndicator(pageCount: Int, currentPage: Int, modifier: Modifier) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
     ) {
-        repeat(pageCount){
-            IndicatorDots(isSelected = it == currentPage, modifier= modifier)
+        repeat(pageCount) {
+            IndicatorDots(isSelected = it == currentPage, modifier = modifier)
         }
     }
 }
@@ -164,17 +161,18 @@ fun PageIndicator(pageCount: Int, currentPage: Int, modifier: Modifier) {
 @Composable
 fun IndicatorDots(isSelected: Boolean, modifier: Modifier) {
     val size = animateDpAsState(targetValue = if (isSelected) 12.dp else 10.dp, label = "")
-    Box(modifier = modifier
-        .padding(2.dp)
-        .size(size.value)
-        .clip(CircleShape)
-        .background(if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else  MaterialTheme.colorScheme.onBackground)
+    Box(
+        modifier = modifier
+            .padding(2.dp)
+            .size(size.value)
+            .clip(CircleShape)
+            .background(if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onBackground)
     )
 }
 
 @Composable
 @Preview
-fun Preview() {
+fun preview() {
     Banner()
 }
 
