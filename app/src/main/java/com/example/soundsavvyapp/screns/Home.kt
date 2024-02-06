@@ -2,8 +2,12 @@ package com.example.soundsavvyapp.screns
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -18,25 +22,44 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
-    Column(modifier) {
-        SearchBar()
-        Banner()
-        Text(
-            modifier = modifier.padding( horizontal = 24.dp),
-            text = "Top Músicas",
-            fontSize = 16.sp,
-        )
-        LazyRow(Modifier.padding(vertical = 16.dp)) {
-            items(music.size) { index ->
-                CardItem(index)
+    val employees = remember { Details.MusicDetailsLists }
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        item {
+            SearchBar()
+        }
+        item {
+            Banner()
+        }
+        item {
+            Text(
+                modifier = modifier.padding( horizontal = 24.dp),
+                text = "Top Músicas",
+                fontSize = 16.sp,
+            )
+        }
+        item {
+            LazyRow(Modifier.padding(vertical = 16.dp)) {
+                items(music.size) { index ->
+                    CardItem(index)
+                }
             }
         }
-        Text(
-            modifier = modifier.padding( horizontal = 24.dp),
-            text = "Mais Vistas",
-            fontSize = 16.sp,
-        )
-        DetailsContent()
+        item {
+            Text(
+                modifier = modifier.padding( horizontal = 24.dp),
+                text = "Mais Vistas",
+                fontSize = 16.sp,
+            )
+        }
+
+        items(
+            employees
+        ) {
+            EmployeeCard(emp = it)
+        }
+
     }
 
 
