@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.screns
+package com.example.soundsavvyapp.view.screns
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

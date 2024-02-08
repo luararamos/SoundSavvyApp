@@ -1,12 +1,13 @@
-package com.example.soundsavvyapp
+package com.example.soundsavvyapp.view
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.soundsavvyapp.screns.HomeScreen
-import com.example.soundsavvyapp.screns.ProfileScreen
-import com.example.soundsavvyapp.screns.SettingsScreen
+import com.example.soundsavvyapp.view.screns.HomeScreen
+import com.example.soundsavvyapp.view.screns.ProfileScreen
+import com.example.soundsavvyapp.view.screns.SettingsScreen
+import com.example.soundsavvyapp.view.BottomBarScreen
 
 
 @Composable

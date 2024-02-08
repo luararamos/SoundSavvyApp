@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.screns
+package com.example.soundsavvyapp.view.screns
 
 import com.example.soundsavvyapp.R
 

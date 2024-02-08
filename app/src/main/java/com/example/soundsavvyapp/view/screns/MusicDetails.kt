@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.screns
+package com.example.soundsavvyapp.view.screns
 
 data class MusicDetails(val id: Int,
                         val title: String,

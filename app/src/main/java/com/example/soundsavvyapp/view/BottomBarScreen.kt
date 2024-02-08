@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp
+package com.example.soundsavvyapp.view
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home

@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.ui.theme
+package com.example.soundsavvyapp.view.theme
 
 import androidx.compose.ui.graphics.Color
 

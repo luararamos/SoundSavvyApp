@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.ui.theme
+package com.example.soundsavvyapp.view.theme
 
 import android.app.Activity
 import android.os.Build

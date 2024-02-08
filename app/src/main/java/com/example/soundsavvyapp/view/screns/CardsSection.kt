@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.screns
+package com.example.soundsavvyapp.view.screns
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,14 +24,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.soundsavvyapp.R
-import com.example.soundsavvyapp.ui.theme.BlueEnd
-import com.example.soundsavvyapp.ui.theme.BlueStart
-import com.example.soundsavvyapp.ui.theme.GreenEnd
-import com.example.soundsavvyapp.ui.theme.GreenStart
-import com.example.soundsavvyapp.ui.theme.OrangeEnd
-import com.example.soundsavvyapp.ui.theme.OrangeStart
-import com.example.soundsavvyapp.ui.theme.PurpleEnd
-import com.example.soundsavvyapp.ui.theme.PurpleStart
+import com.example.soundsavvyapp.view.theme.BlueEnd
+import com.example.soundsavvyapp.view.theme.BlueStart
+import com.example.soundsavvyapp.view.theme.GreenEnd
+import com.example.soundsavvyapp.view.theme.GreenStart
+import com.example.soundsavvyapp.view.theme.OrangeEnd
+import com.example.soundsavvyapp.view.theme.OrangeStart
+import com.example.soundsavvyapp.view.theme.PurpleEnd
+import com.example.soundsavvyapp.view.theme.PurpleStart
 
 
 val music = listOf(
