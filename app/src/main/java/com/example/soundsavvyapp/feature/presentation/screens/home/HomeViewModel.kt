@@ -1,15 +1,23 @@
 package com.example.soundsavvyapp.feature.presentation.screens.home
 
 import android.app.Application
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.soundsavvyapp.feature.domain.APIListener
 import com.example.soundsavvyapp.feature.data.remote.model.Ranking
 import com.example.soundsavvyapp.feature.data.remote.RankingRepository
+import com.example.soundsavvyapp.feature.data.remote.model.All
 import com.example.soundsavvyapp.feature.domain.RankingCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HomeViewModel (application: Application) : AndroidViewModel(application), RankingCase.ViewModel{
+class HomeViewModel (
+    application: Application
+) :  AndroidViewModel(application), RankingCase.ViewModel{
     private val rakingRepository = RankingRepository(application.applicationContext)
 
     private val _ranking = MutableLiveData<Ranking>()

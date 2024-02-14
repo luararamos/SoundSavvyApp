@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.soundsavvyapp.feature.presentation.screens.home.components.Banner
 import com.example.soundsavvyapp.feature.presentation.screens.home.components.CardItem
 import com.example.soundsavvyapp.feature.presentation.screens.home.components.EmployeeCard
@@ -20,7 +21,10 @@ import com.example.soundsavvyapp.feature.presentation.screens.home.components.da
 import com.example.soundsavvyapp.feature.presentation.screens.home.components.music
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+) {
+
     val employees = remember { Details.MusicDetailsLists }
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -33,7 +37,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         }
         item {
             Text(
-                modifier = modifier.padding( horizontal = 24.dp),
+                modifier = modifier.padding(horizontal = 24.dp),
                 text = "Top Músicas",
                 fontSize = 16.sp,
             )
@@ -47,7 +51,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         }
         item {
             Text(
-                modifier = modifier.padding( horizontal = 24.dp),
+                modifier = modifier.padding(horizontal = 24.dp),
                 text = "Mais Vistas",
                 fontSize = 16.sp,
             )
