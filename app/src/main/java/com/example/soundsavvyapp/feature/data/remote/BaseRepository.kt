@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.example.soundsavvyapp.R
-import com.example.soundsavvyapp.constants.SoundSavvyConstants
+import com.example.soundsavvyapp.common.constants.SoundSavvyConstants
 import com.example.soundsavvyapp.feature.domain.APIListener
 import com.google.gson.Gson
 import retrofit2.Call

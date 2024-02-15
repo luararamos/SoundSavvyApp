@@ -12,36 +12,18 @@ import com.example.soundsavvyapp.feature.domain.RankingCase
 import com.example.soundsavvyapp.feature.presentation.navigation.MainScreen
 import com.example.soundsavvyapp.feature.presentation.screens.home.HomeViewModel
 import com.example.soundsavvyapp.ui.theme.SoundSavvyAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : ComponentActivity(), RankingCase.View {
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
 
-    private lateinit var viewModel: HomeViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         setContent {
             SoundSavvyAppTheme {
                 MainScreen()
-                viewModel.findRanking("art", "week", 10)
-                showRanking()
             }
         }
-
-    }
-
-
-    override fun showRanking() {
-        viewModel.ranking.observe(this, Observer { list ->
-            Toast.makeText(this, "Ebaaaaa, bati na api", Toast.LENGTH_SHORT).show()
-        })
-
-        viewModel.loading.observe(this, Observer { visible ->
-
-        })
-
-        viewModel.error.observe(this, Observer { throwable ->
-
-        })
     }
 
     @Preview

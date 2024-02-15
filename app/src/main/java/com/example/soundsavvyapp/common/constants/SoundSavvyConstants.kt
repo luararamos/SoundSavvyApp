@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.constants
+package com.example.soundsavvyapp.common.constants
 
 class SoundSavvyConstants private constructor(){
 

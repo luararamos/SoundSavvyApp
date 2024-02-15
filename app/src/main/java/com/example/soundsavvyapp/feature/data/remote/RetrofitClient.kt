@@ -1,7 +1,7 @@
 package com.example.soundsavvyapp.feature.data.remote
 
 import com.example.soundsavvyapp.BuildConfig.VagalumeSecAPIKEY
-import com.example.soundsavvyapp.constants.SoundSavvyConstants
+import com.example.soundsavvyapp.common.constants.SoundSavvyConstants
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
