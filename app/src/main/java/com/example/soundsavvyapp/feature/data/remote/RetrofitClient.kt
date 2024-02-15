@@ -1,5 +1,6 @@
 package com.example.soundsavvyapp.feature.data.remote
 
+import com.example.soundsavvyapp.BuildConfig.VagalumeSecAPIKEY
 import com.example.soundsavvyapp.constants.SoundSavvyConstants
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -22,7 +23,7 @@ class RetrofitClient private constructor() {
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val request = chain.request()
                         .newBuilder()
-                        .addHeader(SoundSavvyConstants.KEY.API_KEY, personKey)
+                        .addHeader(VagalumeSecAPIKEY, personKey)
                         .build()
                     return chain.proceed(request)
                 }
