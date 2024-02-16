@@ -1,17 +1,12 @@
 package com.example.soundsavvyapp.feature.domain.repository
 
-import com.example.soundsavvyapp.feature.data.remote.model.All
-import com.example.soundsavvyapp.feature.data.remote.model.Ranking
+import com.example.soundsavvyapp.feature.data.remote.model.RankingArt
+import com.example.soundsavvyapp.feature.data.remote.model.RankingMusic
 import com.example.soundsavvyapp.feature.domain.APIListener
-import kotlinx.coroutines.flow.Flow
 
 interface RankingRepository {
+    fun getRankingArt(listener: APIListener<RankingArt>)
 
-    fun getRanking(
-        type: String,
-        period: String,
-        limit: Int,
-        listener: APIListener<Ranking>
-    )
+    fun getRankingMusic(listener: APIListener<RankingMusic>)
 
 }

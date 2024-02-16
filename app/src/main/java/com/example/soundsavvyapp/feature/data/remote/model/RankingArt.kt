@@ -1,5 +1,5 @@
 package com.example.soundsavvyapp.feature.data.remote.model
 
-data class Ranking(
+data class RankingArt(
     val art: Art
 )

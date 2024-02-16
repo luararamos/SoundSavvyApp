@@ -21,6 +21,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import com.example.soundsavvyapp.feature.presentation.screens.home.components.model.MusicDetails
 
 
@@ -41,7 +42,7 @@ fun EmployeeCard(emp: MusicDetails) {
                 Arrangement.Center
             ) {
                 Text(
-                    text = emp.title,
+                    text = emp.name,
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 22.sp,
@@ -49,30 +50,24 @@ fun EmployeeCard(emp: MusicDetails) {
                     )
                 )
                 Text(
-                    text = "Música :- " ,
+                    text = "Artista :- " + emp.artist,
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 15.sp
                     )
                 )
                 Text(
-                    text = "Gênero :- " + emp.genre,
+                    text = "Ranking :- " + emp.ranking,
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 15.sp
                     )
                 )
 
-                Text(
-                    text = "Descrição :- " + emp.description,
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontSize = 15.sp
-                    )
-                )
             }
             Image(
-                painter = painterResource(emp.ImageId), contentDescription = "Music Image",
+                painter = rememberAsyncImagePainter(model = emp.image),
+                contentDescription = "Music Image",
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .padding(8.dp)

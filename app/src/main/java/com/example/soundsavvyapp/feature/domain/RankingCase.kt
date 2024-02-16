@@ -1,10 +1,10 @@
 package com.example.soundsavvyapp.feature.domain
 
-import com.example.soundsavvyapp.feature.data.remote.model.Ranking
+import com.example.soundsavvyapp.feature.data.remote.model.RankingArt
 
 interface RankingCase {
     interface Repository {
-        fun findRaking(type: String, period: String, limit: Int, listener: APIListener<Ranking>)
+        fun findRaking(type: String, period: String, limit: Int, listener: APIListener<RankingArt>)
     }
 
     interface ViewModel {
