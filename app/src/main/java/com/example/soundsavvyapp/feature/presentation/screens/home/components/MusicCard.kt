@@ -1,6 +1,7 @@
-package com.example.soundsavvyapp.screns
+package com.example.soundsavvyapp.feature.presentation.screens.home.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
+import com.example.soundsavvyapp.feature.presentation.screens.home.components.model.MusicDetails
 
 
 @Composable
@@ -34,13 +37,15 @@ fun EmployeeCard(emp: MusicDetails) {
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
 
-        Row(modifier = Modifier.padding(20.dp)) {
+        Row(modifier = Modifier
+            .background(emp.color)) {
             Column(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(1f)
+                    .padding(20.dp),
                 Arrangement.Center
             ) {
                 Text(
-                    text = emp.title,
+                    text = emp.name,
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 22.sp,
@@ -48,33 +53,27 @@ fun EmployeeCard(emp: MusicDetails) {
                     )
                 )
                 Text(
-                    text = "Música :- " ,
+                    text = "Artista :- " + emp.artist,
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 15.sp
                     )
                 )
                 Text(
-                    text = "Gênero :- " + emp.genre,
+                    text = "Ranking :- " + emp.ranking,
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 15.sp
                     )
                 )
 
-                Text(
-                    text = "Descrição :- " + emp.description,
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontSize = 15.sp
-                    )
-                )
             }
             Image(
-                painter = painterResource(emp.ImageId), contentDescription = "Music Image",
+                painter = rememberAsyncImagePainter(model = emp.image),
+                contentDescription = "Music Image",
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(28.dp)
                     .size(110.dp)
                     .clip((CircleShape))
             )

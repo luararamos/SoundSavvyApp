@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.screns
+package com.example.soundsavvyapp.feature.presentation.screens.favorites
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,7 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SettingsScreen() {
+fun FavoritesScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -32,5 +32,5 @@ fun SettingsScreen() {
 @Composable
 @Preview
 fun SettingsScreenPreview() {
-    SettingsScreen()
+    FavoritesScreen()
 }
