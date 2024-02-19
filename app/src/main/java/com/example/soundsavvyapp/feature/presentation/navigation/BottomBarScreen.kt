@@ -1,6 +1,7 @@
 package com.example.soundsavvyapp.feature.presentation.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
@@ -18,9 +19,9 @@ sealed class BottomBarScreen(
     )
 
     object Favorites : BottomBarScreen(
-        route = "settings",
-        title = "Settings",
-        icon = Icons.Default.Settings
+        route = "favoritos",
+        title = "Favorites",
+        icon = Icons.Default.Favorite
     )
     object Profile : BottomBarScreen(
         route = "profile",

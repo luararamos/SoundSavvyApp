@@ -1,6 +1,7 @@
 package com.example.soundsavvyapp.feature.presentation.screens.home.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,9 +37,11 @@ fun EmployeeCard(emp: MusicDetails) {
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
 
-        Row(modifier = Modifier.padding(20.dp)) {
+        Row(modifier = Modifier
+            .background(emp.color)) {
             Column(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(1f)
+                    .padding(20.dp),
                 Arrangement.Center
             ) {
                 Text(
@@ -70,7 +73,7 @@ fun EmployeeCard(emp: MusicDetails) {
                 contentDescription = "Music Image",
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(28.dp)
                     .size(110.dp)
                     .clip((CircleShape))
             )
