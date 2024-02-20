@@ -27,4 +27,5 @@ interface RankingService {
         @Field("period") period: String = "week",
         @Field("limit") limit: Int = 10,
     ): Call<RankingMusic>
+
 }

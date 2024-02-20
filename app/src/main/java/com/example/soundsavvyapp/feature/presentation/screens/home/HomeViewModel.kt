@@ -7,17 +7,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.soundsavvyapp.common.toDomain
 import com.example.soundsavvyapp.feature.data.remote.model.All
+import com.example.soundsavvyapp.feature.data.remote.model.Doc
 import com.example.soundsavvyapp.feature.domain.APIListener
 import com.example.soundsavvyapp.feature.data.remote.model.RankingArt
 import com.example.soundsavvyapp.feature.data.remote.model.RankingMusic
+import com.example.soundsavvyapp.feature.data.remote.model.SearchMusic
 import com.example.soundsavvyapp.feature.domain.repository.RankingRepository
+import com.example.soundsavvyapp.feature.domain.repository.SearchRepository
 import com.example.soundsavvyapp.feature.presentation.screens.home.components.model.MusicDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val rankingRepository: RankingRepository
+    private val rankingRepository: RankingRepository,
+    private val searchRepository: SearchRepository
 ) : ViewModel() {
 
     private val _rankingArt = MutableLiveData<RankingArt>()
@@ -35,12 +41,20 @@ class HomeViewModel @Inject constructor(
     private val _stateMusic = mutableStateOf(HomeState<MusicDetails>())
     val stateMusic: State<HomeState<MusicDetails>> = _stateMusic
 
+    private val _searchMusic = mutableStateOf(HomeState<Doc>())
+    val searchMusic: State<HomeState<Doc>> = _searchMusic
+
+    private val _isSearching = MutableStateFlow(false)
+    val isSearching = _isSearching.asStateFlow()
+
+    private val _searchText = MutableStateFlow("")
+    val searchText = _searchText.asStateFlow()
     fun getRankingArt( ) {
         rankingRepository.getRankingArt(object : APIListener<RankingArt> {
             override fun onSuccess(response: RankingArt) {
                 _rankingArt.value = response
                 _state.value = state.value.copy(
-                    ranking = response.art.week.all
+                    value = response.art.week.all
                 )
             }
             override fun onError(response: String) {
@@ -57,7 +71,7 @@ class HomeViewModel @Inject constructor(
         rankingRepository.getRankingMusic(object : APIListener<RankingMusic> {
             override fun onSuccess(response: RankingMusic) {
                 _stateMusic.value = stateMusic.value.copy(
-                    ranking = response.mus.week.all.toDomain()
+                    value = response.mus.week.all.toDomain()
                 )
 
             }
@@ -67,6 +81,26 @@ class HomeViewModel @Inject constructor(
 
             override fun onComplete() {
             }
+        })
+    }
+
+    fun searchMusic(search: String){
+        searchRepository.searchMusic(search, object :APIListener<SearchMusic>{
+            override fun onSuccess(response: SearchMusic) {
+                _searchMusic.value = searchMusic.value.copy(
+                    value = response.response.docs
+                )
+                _isSearching.value = false
+            }
+
+            override fun onError(response: String) {
+
+            }
+
+            override fun onComplete() {
+                _isSearching.value = true
+            }
+
         })
     }
 }

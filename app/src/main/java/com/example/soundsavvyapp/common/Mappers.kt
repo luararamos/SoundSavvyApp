@@ -13,7 +13,6 @@ import com.example.soundsavvyapp.ui.theme.PurpleEnd
 import com.example.soundsavvyapp.ui.theme.PurpleStart
 
 fun List<All>.toDomain(): List<MusicDetails> {
-    var indice = 0
     val listColors = arrayOf(
         getGradient(PurpleStart, PurpleEnd),
         getGradient(BlueStart, BlueEnd),
@@ -26,7 +25,7 @@ fun List<All>.toDomain(): List<MusicDetails> {
             artist = it.art?.name ?: "",
             ranking = it.rank,
             image = it.art?.pic_medium ?: "",
-            color =  listColors[indice]
+            color =  listColors[0]
         )
 
     }

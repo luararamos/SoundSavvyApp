@@ -27,7 +27,7 @@ fun HomeScreen(
     val state = viewModel.state.value
     val stateMusic = viewModel.stateMusic.value
 
-    val employees = stateMusic.ranking
+    val employees = stateMusic.value
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -47,7 +47,7 @@ fun HomeScreen(
         }
         item {
             LazyRow(Modifier.padding(vertical = 16.dp)) {
-                items(state.ranking) { all ->
+                items(state.value) { all ->
                     CardItem(
                         all
                     )

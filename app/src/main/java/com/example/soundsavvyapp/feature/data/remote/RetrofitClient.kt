@@ -23,7 +23,6 @@ class RetrofitClient private constructor() {
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val request = chain.request()
                         .newBuilder()
-                        .addHeader(VagalumeSecAPIKEY, personKey)
                         .build()
                     return chain.proceed(request)
                 }
