@@ -40,10 +40,11 @@ fun HomeScreen(
     ) {
         item {
             SearchBar(
+                enabled = false,
                 modifier= Modifier.clickable {
                     navController.navigate(Routes.Search.route)
-                }
-
+                },
+                navController = navController
             )
         }
         item {

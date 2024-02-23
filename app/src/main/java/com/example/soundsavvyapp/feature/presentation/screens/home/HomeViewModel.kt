@@ -18,6 +18,7 @@ import com.example.soundsavvyapp.feature.presentation.screens.home.components.mo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,9 +26,6 @@ class HomeViewModel @Inject constructor(
     private val rankingRepository: RankingRepository,
     private val searchRepository: SearchRepository
 ) : ViewModel() {
-
-    private val _rankingArt = MutableLiveData<RankingArt>()
-    val rankingArt: LiveData<RankingArt> = _rankingArt
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
@@ -47,12 +45,9 @@ class HomeViewModel @Inject constructor(
     private val _isSearching = MutableStateFlow(false)
     val isSearching = _isSearching.asStateFlow()
 
-    private val _searchText = MutableStateFlow("")
-    val searchText = _searchText.asStateFlow()
     fun getRankingArt( ) {
         rankingRepository.getRankingArt(object : APIListener<RankingArt> {
             override fun onSuccess(response: RankingArt) {
-                _rankingArt.value = response
                 _state.value = state.value.copy(
                     value = response.art.week.all
                 )
@@ -76,7 +71,7 @@ class HomeViewModel @Inject constructor(
 
             }
             override fun onError(response: String) {
-
+                _error.value = response
             }
 
             override fun onComplete() {
@@ -90,15 +85,15 @@ class HomeViewModel @Inject constructor(
                 _searchMusic.value = searchMusic.value.copy(
                     value = response.response.docs
                 )
-                _isSearching.value = false
+                _isSearching.update { false }
             }
 
             override fun onError(response: String) {
-
+                _error.value = response
             }
 
             override fun onComplete() {
-                _isSearching.value = true
+                _isSearching.update { true }
             }
 
         })

@@ -6,7 +6,6 @@ import com.example.soundsavvyapp.feature.presentation.screens.home.components.Se
 
 @Composable
 fun ProfileScreen() {
-    SearchBar()
 }
 
 @Composable

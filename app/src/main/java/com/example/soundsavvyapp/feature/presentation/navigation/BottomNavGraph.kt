@@ -27,7 +27,7 @@ fun BottomNavGraph(navController: NavHostController) {
             ProfileScreen()
         }
         composable(route = Routes.Search.route) {
-            SearchScreen()
+            SearchScreen(navController =navController)
         }
 
     }
