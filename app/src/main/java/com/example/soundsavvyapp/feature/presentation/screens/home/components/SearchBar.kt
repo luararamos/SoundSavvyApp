@@ -60,7 +60,6 @@ fun SearchBar(
     val stateSearchMusic = viewModel.searchMusic.value
     val employees = stateSearchMusic.value
     var text by remember { mutableStateOf(TextFieldValue("")) }
-    val isSearching = viewModel.isSearching.value
     val focusRequester = remember { FocusRequester() }
 
 
@@ -110,7 +109,7 @@ fun SearchBar(
                 onDone = { viewModel.searchMusic(text.text) })
         )
         Spacer(modifier = Modifier.height(16.dp))
-        if (isSearching) {
+        if (false) {
             Box(modifier = Modifier.fillMaxSize()) {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)

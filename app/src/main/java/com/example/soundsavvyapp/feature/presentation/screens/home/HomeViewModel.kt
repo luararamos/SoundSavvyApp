@@ -27,11 +27,6 @@ class HomeViewModel @Inject constructor(
     private val searchRepository: SearchRepository
 ) : ViewModel() {
 
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
-
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
 
     private val _state = mutableStateOf(HomeState<All>())
     val state: State<HomeState<All>> = _state
@@ -42,8 +37,6 @@ class HomeViewModel @Inject constructor(
     private val _searchMusic = mutableStateOf(HomeState<Doc>())
     val searchMusic: State<HomeState<Doc>> = _searchMusic
 
-    private val _isSearching = MutableStateFlow(false)
-    val isSearching = _isSearching.asStateFlow()
 
     fun getRankingArt( ) {
         rankingRepository.getRankingArt(object : APIListener<RankingArt> {
@@ -53,11 +46,15 @@ class HomeViewModel @Inject constructor(
                 )
             }
             override fun onError(response: String) {
-                _error.value = response
+                _state.value = state.value.copy(
+                    error = response
+                )
             }
 
-            override fun onComplete() {
-                _loading.value = false
+            override fun onLoading() {
+                _state.value = state.value.copy(
+                    isLoading = true
+                )
             }
         })
     }
@@ -71,10 +68,9 @@ class HomeViewModel @Inject constructor(
 
             }
             override fun onError(response: String) {
-                _error.value = response
             }
 
-            override fun onComplete() {
+            override fun onLoading() {
             }
         })
     }
@@ -85,15 +81,12 @@ class HomeViewModel @Inject constructor(
                 _searchMusic.value = searchMusic.value.copy(
                     value = response.response.docs
                 )
-                _isSearching.update { false }
             }
 
             override fun onError(response: String) {
-                _error.value = response
             }
 
-            override fun onComplete() {
-                _isSearching.update { true }
+            override fun onLoading() {
             }
 
         })
