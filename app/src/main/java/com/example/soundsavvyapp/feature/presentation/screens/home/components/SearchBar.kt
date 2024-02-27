@@ -109,7 +109,7 @@ fun SearchBar(
                 onDone = { viewModel.searchMusic(text.text) })
         )
         Spacer(modifier = Modifier.height(16.dp))
-        if (false) {
+        if (stateSearchMusic.isLoading) {
             Box(modifier = Modifier.fillMaxSize()) {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)

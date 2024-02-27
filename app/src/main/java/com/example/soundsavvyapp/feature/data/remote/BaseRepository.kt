@@ -19,6 +19,7 @@ open class BaseRepository(val context: Context) {
     }
 
     fun <T> executeCall(call: Call<T>, listener: APIListener<T>) {
+        listener.onLoading(true)
         call.enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
                 if (response.code() == SoundSavvyConstants.HTTP.SUCCESS) {
@@ -26,10 +27,12 @@ open class BaseRepository(val context: Context) {
                 } else {
                     listener.onError(failResponse(response.errorBody()!!.string()))
                 }
+                listener.onLoading(false)
             }
 
             override fun onFailure(call: Call<T>, t: Throwable) {
                 listener.onError(context.getString(R.string.ERROR_UNEXPECTED))
+                listener.onLoading(false)
             }
         })
     }

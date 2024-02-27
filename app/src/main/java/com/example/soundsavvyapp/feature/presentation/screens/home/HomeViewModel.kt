@@ -2,10 +2,8 @@ package com.example.soundsavvyapp.feature.presentation.screens.home
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.soundsavvyapp.common.toDomain
+import com.example.soundsavvyapp.common.details
 import com.example.soundsavvyapp.feature.data.remote.model.All
 import com.example.soundsavvyapp.feature.data.remote.model.Doc
 import com.example.soundsavvyapp.feature.domain.APIListener
@@ -16,9 +14,6 @@ import com.example.soundsavvyapp.feature.domain.repository.RankingRepository
 import com.example.soundsavvyapp.feature.domain.repository.SearchRepository
 import com.example.soundsavvyapp.feature.presentation.screens.home.components.model.MusicDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,6 +32,10 @@ class HomeViewModel @Inject constructor(
     private val _searchMusic = mutableStateOf(HomeState<Doc>())
     val searchMusic: State<HomeState<Doc>> = _searchMusic
 
+    init {
+        getRankingArt()
+        getRankingMusic()
+    }
 
     fun getRankingArt( ) {
         rankingRepository.getRankingArt(object : APIListener<RankingArt> {
@@ -50,10 +49,9 @@ class HomeViewModel @Inject constructor(
                     error = response
                 )
             }
-
-            override fun onLoading() {
+            override fun onLoading(stateLoading: Boolean) {
                 _state.value = state.value.copy(
-                    isLoading = true
+                    isLoading = stateLoading
                 )
             }
         })
@@ -63,15 +61,22 @@ class HomeViewModel @Inject constructor(
         rankingRepository.getRankingMusic(object : APIListener<RankingMusic> {
             override fun onSuccess(response: RankingMusic) {
                 _stateMusic.value = stateMusic.value.copy(
-                    value = response.mus.week.all.toDomain()
+                    value = response.mus.week.all.details()
                 )
 
             }
             override fun onError(response: String) {
+                _stateMusic.value = stateMusic.value.copy(
+                    error = response
+                )
             }
 
-            override fun onLoading() {
+            override fun onLoading(stateLoading: Boolean) {
+                _stateMusic.value = stateMusic.value.copy(
+                    isLoading = stateLoading
+                )
             }
+
         })
     }
 
@@ -84,10 +89,17 @@ class HomeViewModel @Inject constructor(
             }
 
             override fun onError(response: String) {
+                _searchMusic.value = searchMusic.value.copy(
+                   error = response
+                )
             }
 
-            override fun onLoading() {
+            override fun onLoading(stateLoading: Boolean) {
+                _searchMusic.value = searchMusic.value.copy(
+                    isLoading = stateLoading
+                )
             }
+
 
         })
     }
