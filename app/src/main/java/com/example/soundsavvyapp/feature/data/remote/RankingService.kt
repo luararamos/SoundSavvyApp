@@ -13,7 +13,6 @@ interface RankingService {
     @POST("rank.php")
     @FormUrlEncoded
     fun findRakingArt(
-        @Field("apikey") apiKey: String = BuildConfig.VagalumeSecAPIKEY,
         @Field("type") type: String = "art",
         @Field("period") period: String = "week",
         @Field("limit") limit: Int = 10,
@@ -22,9 +21,9 @@ interface RankingService {
     @POST("rank.php")
     @FormUrlEncoded
     fun findRakingMusic(
-        @Field("apikey") apiKey: String = BuildConfig.VagalumeSecAPIKEY,
         @Field("type") type: String = "mus",
         @Field("period") period: String = "week",
         @Field("limit") limit: Int = 10,
     ): Call<RankingMusic>
+
 }
