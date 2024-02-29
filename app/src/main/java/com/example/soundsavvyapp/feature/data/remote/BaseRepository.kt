@@ -31,7 +31,7 @@ open class BaseRepository(val context: Context) {
             }
 
             override fun onFailure(call: Call<T>, t: Throwable) {
-                listener.onError(context.getString(R.string.ERROR_UNEXPECTED))
+                listener.onError(SoundSavvyConstants.ERROR.ERROR_UNEXPECTED)
                 listener.onLoading(false)
             }
         })
