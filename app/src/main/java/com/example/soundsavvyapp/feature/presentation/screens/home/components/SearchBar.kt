@@ -35,7 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
@@ -43,17 +42,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.findNavController
 import com.example.soundsavvyapp.R
-import com.example.soundsavvyapp.feature.presentation.screens.home.HomeViewModel
+import com.example.soundsavvyapp.feature.presentation.screens.home.SearchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel(),
+    viewModel: SearchViewModel = hiltViewModel(),
     enabled: Boolean,
     navController: NavController
 ) {
@@ -70,13 +66,13 @@ fun SearchBar(
     Column(
         modifier.padding(vertical = 8.dp, horizontal = 24.dp)
     ) {
-        if (enabled){
+        if (enabled) {
             Image(imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "back",
                 modifier = modifier.clickable {
                     navController.popBackStack()
                 })
-        }else{
+        } else {
             Spacer(modifier = Modifier.height(18.dp))
         }
         Text(
