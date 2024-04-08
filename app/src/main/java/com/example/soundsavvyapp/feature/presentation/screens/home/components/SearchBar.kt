@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
@@ -121,13 +123,25 @@ fun SearchBar(
                     employees
                 ) { doc ->
 
-                    Text(
-                        text = "${doc.title} \nBanda:${doc.band}",
-                        color = Color.Black,
+                    Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 16.dp)
-                    )
+                            .weight(1f)
+                    ) {
+                        Text(
+                            text = "${doc.title} \nBanda:${doc.band}",
+                            color = Color.Black,
+                            modifier = Modifier
+                                .padding(vertical = 16.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_favorite_off),
+                            contentDescription = null,
+                            modifier = modifier.clickable {
+                                viewModel.insertMusic(doc)
+                            })
+                    }
+
                 }
             }
         }
