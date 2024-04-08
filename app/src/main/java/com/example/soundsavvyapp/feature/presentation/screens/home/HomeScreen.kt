@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -38,7 +37,7 @@ import com.example.soundsavvyapp.common.constants.SoundSavvyConstants
 import com.example.soundsavvyapp.feature.presentation.navigation.Routes
 import com.example.soundsavvyapp.feature.presentation.screens.home.components.Banner
 import com.example.soundsavvyapp.feature.presentation.screens.home.components.CardItem
-import com.example.soundsavvyapp.feature.presentation.screens.home.components.EmployeeCard
+import com.example.soundsavvyapp.feature.presentation.screens.home.components.MusicCard
 import com.example.soundsavvyapp.feature.presentation.screens.home.components.SearchBar
 
 @Composable
@@ -121,7 +120,7 @@ fun HomeScreen(
                 }
 
             }
-            EmployeeCard(emp = it)
+            MusicCard(emp = it)
         }
     }
 
