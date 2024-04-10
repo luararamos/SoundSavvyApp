@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.feature.presentation.screens.home.components
+package com.example.soundsavvyapp.feature.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.soundsavvyapp.R
 import com.example.soundsavvyapp.feature.data.remote.model.All
-import com.example.soundsavvyapp.feature.presentation.screens.home.components.model.Music
+import com.example.soundsavvyapp.feature.presentation.model.Music
 import com.example.soundsavvyapp.ui.theme.BlueEnd
 import com.example.soundsavvyapp.ui.theme.BlueStart
 import com.example.soundsavvyapp.ui.theme.GreenEnd

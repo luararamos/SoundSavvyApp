@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.feature.presentation.screens.home.components
+package com.example.soundsavvyapp.feature.presentation.components
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api

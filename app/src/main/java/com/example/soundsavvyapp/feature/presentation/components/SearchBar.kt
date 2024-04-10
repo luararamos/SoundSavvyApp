@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.feature.presentation.screens.home.components
+package com.example.soundsavvyapp.feature.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -28,6 +28,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -45,7 +46,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.soundsavvyapp.R
-import com.example.soundsavvyapp.feature.presentation.screens.home.SearchViewModel
+import com.example.soundsavvyapp.feature.presentation.screens.search.SearchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,6 +60,8 @@ fun SearchBar(
     val employees = stateSearchMusic.value
     var text by remember { mutableStateOf(TextFieldValue("")) }
     val focusRequester = remember { FocusRequester() }
+
+    val favorites by viewModel.favorites.observeAsState(initial = emptyMap())
 
 
     LaunchedEffect(Unit) {
@@ -120,9 +123,10 @@ fun SearchBar(
                     .weight(1f)
             ) {
                 items(
-                    employees
+                    employees,
+                    key = { doc -> doc.id }
                 ) { doc ->
-
+                    val isFavorite = favorites[doc.id] ?: false
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -135,7 +139,7 @@ fun SearchBar(
                                 .padding(vertical = 16.dp)
                         )
                         Image(
-                            painter = painterResource(id = R.drawable.ic_favorite_off),
+                            painter = painterResource(id = if (isFavorite) R.drawable.ic_favorite_selected else R.drawable.ic_favorite_off),
                             contentDescription = null,
                             modifier = modifier.clickable {
                                 viewModel.insertMusic(doc)

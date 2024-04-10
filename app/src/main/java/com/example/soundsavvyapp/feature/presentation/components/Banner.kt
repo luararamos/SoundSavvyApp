@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.feature.presentation.screens.home.components
+package com.example.soundsavvyapp.feature.presentation.components
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image

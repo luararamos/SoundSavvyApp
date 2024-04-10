@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Observer
 import com.example.soundsavvyapp.feature.data.local.Favorite
+import com.example.soundsavvyapp.feature.presentation.components.CardFavorite
 import com.example.soundsavvyapp.feature.presentation.screens.home.HomeViewModel
 
 @Composable
@@ -33,15 +34,9 @@ fun FavoritesScreen(
 fun FavoritesList(favorites: List<Favorite>) {
     LazyColumn {
         items(favorites) { favorite ->
-            FavoriteItem(favorite)
+            CardFavorite(favorite = favorite)
         }
     }
-}
-
-@Composable
-fun FavoriteItem(favorite: Favorite) {
-    Text(text = "Música: ${favorite.music}, Artista: ${favorite.art}")
-    // Personalize conforme necessário.
 }
 
 @Composable

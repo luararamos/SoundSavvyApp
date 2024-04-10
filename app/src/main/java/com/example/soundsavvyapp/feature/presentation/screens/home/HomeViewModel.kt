@@ -12,14 +12,13 @@ import com.example.soundsavvyapp.feature.data.remote.model.RankingMusic
 import com.example.soundsavvyapp.feature.data.remote.model.SearchMusic
 import com.example.soundsavvyapp.feature.domain.repository.RankingRepository
 import com.example.soundsavvyapp.feature.domain.repository.SearchRepository
-import com.example.soundsavvyapp.feature.presentation.screens.home.components.model.MusicDetails
+import com.example.soundsavvyapp.feature.presentation.model.MusicDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val rankingRepository: RankingRepository,
-    private val searchRepository: SearchRepository
+    private val rankingRepository: RankingRepository
 ) : ViewModel() {
 
 
@@ -28,9 +27,6 @@ class HomeViewModel @Inject constructor(
 
     private val _stateMusic = mutableStateOf(HomeState<MusicDetails>())
     val stateMusic: State<HomeState<MusicDetails>> = _stateMusic
-
-    private val _searchMusic = mutableStateOf(HomeState<Doc>())
-    val searchMusic: State<HomeState<Doc>> = _searchMusic
 
     init {
         getRankingArt()
@@ -80,27 +76,8 @@ class HomeViewModel @Inject constructor(
         })
     }
 
-    fun searchMusic(search: String){
-        searchRepository.searchMusic(search, object :APIListener<SearchMusic>{
-            override fun onSuccess(response: SearchMusic) {
-                _searchMusic.value = searchMusic.value.copy(
-                    value = response.response.docs
-                )
-            }
-
-            override fun onError(response: String) {
-                _searchMusic.value = searchMusic.value.copy(
-                   error = response
-                )
-            }
-
-            override fun onLoading(stateLoading: Boolean) {
-                _searchMusic.value = searchMusic.value.copy(
-                    isLoading = stateLoading
-                )
-            }
-
-
-        })
+    fun clearErrors() {
+        _state.value = state.value.copy(error = "")
+        _stateMusic.value = stateMusic.value.copy(error = "")
     }
 }

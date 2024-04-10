@@ -18,6 +18,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,10 +37,11 @@ import androidx.navigation.NavHostController
 import com.example.soundsavvyapp.R
 import com.example.soundsavvyapp.common.constants.SoundSavvyConstants
 import com.example.soundsavvyapp.feature.presentation.navigation.Routes
-import com.example.soundsavvyapp.feature.presentation.screens.home.components.Banner
-import com.example.soundsavvyapp.feature.presentation.screens.home.components.CardItem
-import com.example.soundsavvyapp.feature.presentation.screens.home.components.MusicCard
-import com.example.soundsavvyapp.feature.presentation.screens.home.components.SearchBar
+import com.example.soundsavvyapp.feature.presentation.components.Banner
+import com.example.soundsavvyapp.feature.presentation.components.CardItem
+import com.example.soundsavvyapp.feature.presentation.components.ErrorDialog
+import com.example.soundsavvyapp.feature.presentation.components.MusicCard
+import com.example.soundsavvyapp.feature.presentation.components.SearchBar
 
 @Composable
 fun HomeScreen(
@@ -50,7 +53,11 @@ fun HomeScreen(
     val stateArt = viewModel.state.value
     val stateMusic = viewModel.stateMusic.value
     val employees = stateMusic.value
-    var isDisplayDialog by remember { mutableStateOf(false) }
+    val showErrorDialog = remember { mutableStateOf(stateArt.error.isNotBlank() || stateMusic.error.isNotBlank()) }
+    LaunchedEffect(stateArt.error, stateMusic.error) {
+        showErrorDialog.value = stateArt.error.isNotBlank() || stateMusic.error.isNotBlank()
+    }
+
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -124,48 +131,19 @@ fun HomeScreen(
         }
     }
 
-    if (stateArt.error.isNotBlank() or stateMusic.error.isNotBlank()) {
-        isDisplayDialog = true
-    }
-
-    if (isDisplayDialog) {
-        Dialog(onDismissRequest = { isDisplayDialog = false }) {
-            Column(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(15))
-                    .size(300.dp)
-                    .background(Color.White)
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_error),
-                    contentDescription = null
-                )
-                Spacer(modifier = Modifier.size(16.dp))
-                Text(text = SoundSavvyConstants.ERROR.UNKNOWN_ERROR)
-                Spacer(modifier = Modifier.size(16.dp))
-                Text(text = "${stateArt.error} ${stateMusic.error} ")
-                Spacer(modifier = Modifier.size(16.dp))
-                Row() {
-                    Button(onClick = { isDisplayDialog = false }) {
-                        Text(text = "Cancelar")
-                    }
-                    Spacer(modifier = Modifier.size(8.dp))
-                    Button(onClick = {
-                        viewModel.getRankingArt()
-                        viewModel.getRankingMusic()
-                    }) {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_sync),
-                            contentDescription = null
-                        )
-                    }
-                }
-            }
+    ErrorDialog(
+        showErrorDialog = showErrorDialog.value,
+        errorMessage = "${stateArt.error} ${stateMusic.error}",
+        onDismiss = {
+            viewModel.clearErrors()
+            showErrorDialog.value = false
+        },
+        onRetry = {
+            viewModel.getRankingArt()
+            viewModel.getRankingMusic()
+            showErrorDialog.value = false
         }
-    }
+    )
 
 }
 

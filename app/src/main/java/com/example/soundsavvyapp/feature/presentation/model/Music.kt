@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.feature.presentation.screens.home.components.model
+package com.example.soundsavvyapp.feature.presentation.model
 
 import androidx.compose.ui.graphics.Brush
 

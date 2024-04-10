@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import com.example.soundsavvyapp.feature.presentation.screens.favorites.FavoritesScreen
 import com.example.soundsavvyapp.feature.presentation.screens.home.HomeScreen
 import com.example.soundsavvyapp.feature.presentation.screens.profile.ProfileScreen
-import com.example.soundsavvyapp.feature.presentation.screens.home.SearchScreen
+import com.example.soundsavvyapp.feature.presentation.screens.search.SearchScreen
 
 
 

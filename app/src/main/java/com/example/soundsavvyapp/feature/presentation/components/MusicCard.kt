@@ -1,4 +1,4 @@
-package com.example.soundsavvyapp.feature.presentation.screens.home.components
+package com.example.soundsavvyapp.feature.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.example.soundsavvyapp.feature.presentation.screens.home.components.model.MusicDetails
+import com.example.soundsavvyapp.feature.presentation.model.MusicDetails
 
 
 @Composable
@@ -37,7 +37,7 @@ fun MusicCard(emp: MusicDetails) {
     ) {
 
         Row(modifier = Modifier
-            .background(emp.color)) {
+            .background(Color.White)) {
             Column(
                 modifier = Modifier.weight(1f)
                     .padding(20.dp),
